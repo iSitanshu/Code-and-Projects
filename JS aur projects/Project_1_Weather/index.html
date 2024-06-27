@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">search
+    <link rel="stylesheet" href="style.css">
+    <title>Weather Website</title>
+</head>
+<body>
+    <div class="top"><h1>Todays Weather Report will be displayed below</h1></div>
+    <div class="main_box">
+        <div class="search">
+            <input type="text" placeholder="Enter the name">
+            <button class="search_icon"><img src="/Project 1/images/search.png" alt="Search" height="15px"></button>
+        </div>
+        <div class="error">
+            <p>Invalid City Name</p>
+        </div>
+        <div class="weather">
+            <div class="image_of_weather"><img src="/Project 1/images/clouds.png" alt="" height="70px" class="image_of_weather_"></div>
+            <p class="temp">22°C</h1>
+            <h2 class="place"  style="color: white;">Bengaluru</h2>
+        <div class="lower_part">
+            <div class="otherdetails">
+                <div class="humidity">
+                    <div class="humidityimage"><img src="/Project 1/images/humidity.png" alt="" height="29px"></div>
+                    <div class="tempandhum">
+                        <p class="humiditydetail">53%</p>
+                        <p class="humiditydetail1" style="color: white;">Humidity</p>
+                    </div>
+                </div>
+            </div>
+            <div class="otherdetails2">
+                <div class="windspped">
+                    <div class="windimage"><img src="/Project 1/images/wind.png" alt="" height="28px"></div>
+                    <div class="winddetail">
+                        <p class="winddetail12">5.66 km/h</p>
+                        <p class="winddetail1"style="color: white;">Wind Speed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    const apikey = "e89c8d035f83f94d324e007e65bf2561";
+    const apiurl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+    const searchbox = document.querySelector(".search input");
+    const searchbtn = document.querySelector(".search button");
+    const weathericon = document.querySelector(".image_of_weather_")
+    // console.log(searchbox.value);
+    async function checkweather(city){
+        const response = await fetch(apiurl + city + `&appid=${apikey}`)
+
+        if(response.status == 404){
+            document.querySelector(".error").style.display="block"
+            document.querySelector(".weather").style.display="none"
+        }
+        else{
+        var data = await response.json()
+        // console.log(data);
+        // console.log(city);
+        document.querySelector(".place").innerHTML= data.name;
+        document.querySelector(".temp").innerHTML= Math.round(data.main.temp)+"°C";
+        document.querySelector(".humiditydetail").innerHTML= data.main.humidity+"%";
+        document.querySelector(".winddetail12").innerHTML= data.wind.speed+" km/h";
+
+        //updating the image
+
+        if(data.weather[0].main == "Clouds"){
+            weathericon.src = "/Project 1/images/clouds.png"
+        }
+        else if(data.weather[0].main == "Clear"){
+            weathericon.src = "/Project 1/images/clear.png"
+        }
+        else if(data.weather[0].main == "Rain"){
+            weathericon.src = "/Project 1/images/rain.png"
+        }
+        else if(data.weather[0].main == "Drizzle"){
+            weathericon.src = "/Project 1/images/drizzle.png"
+        }
+        else if(data.weather[0].main == "Mist"){
+            weathericon.src = "/Project 1/images/mist.png"
+        }
+        
+        document.querySelector(".weather").style.display="block"
+        // document.querySelector(".lower_part").style.display="block"
+        document.querySelector(".error").style.display="none"
+    }
+    }
+    console.log(searchbox.value)
+    searchbtn.addEventListener("click",()=>{checkweather(searchbox.value);})
+</script>
+</html>

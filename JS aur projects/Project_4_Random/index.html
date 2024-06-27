@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Random Password</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            background: rgb(8, 8, 75);
+        }
+        .main{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 100px;
+        }
+        #random_password{
+            color: rgb(0, 0, 0);
+            background: white;
+            height: 40px;
+            min-width: 30%;
+            padding: 5px;
+            border: none;
+        }
+        .box_2_containing_input{
+            background: white;
+            width: 50%;
+            display: flex;
+            flex-direction: row;
+            padding: 5px;
+            text-align: center;
+            justify-content: space-between;
+        }
+        #but{
+            height: 40px;
+            background: green;
+            color: white;
+            min-width: 20%;
+            border-radius: 5px;
+        }
+        #but:hover{
+            background: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="box_1_contain_heading">
+            <h1 style="color: white;">Generate a</h1>
+            <h1 style="color: green;"><u>Random Password</u></h1>
+        </div>
+        <div class="box_2_containing_input"><input type="text" id="random_password" placeholder="Password">
+        <img src="/Project_4_Random/image/copy.png" alt="copy" onclick="copy()" height="35px"></div>
+        <div class="box_3_containing_button"><button id="but" onclick="createPassword()">Generate Password</button></div>
+    </div>
+</body>
+<script>
+    const Passwordbox = document.getElementById("random_password")
+    const length = 12;//password length 12
+
+    const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    const lowerCase = "abcdefghijklmnopqrstuvwxyz"
+    const number = "1234567890"
+    const symbol = "@#$%^&*()_+~|}{[]\></-=}"
+
+    const allchar = upperCase+lowerCase+number+symbol
+
+    function createPassword(){
+        let password = ""
+        password+=upperCase[Math.floor(Math.random()*upperCase.length)]
+        password+=lowerCase[Math.floor(Math.random()*lowerCase.length)]
+        password+=number[Math.floor(Math.random()*number.length)]
+        password+=symbol[Math.floor(Math.random()*symbol.length)]
+
+        while(password.length < length){
+            password+=allchar[Math.floor(Math.random()*allchar.length)]
+            Passwordbox.value = password
+        }
+    }
+    function copy(){
+        Passwordbox.select()
+        document.execCommand("copy")
+    }
+</script>
+</html>

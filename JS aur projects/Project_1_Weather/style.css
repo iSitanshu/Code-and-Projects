@@ -1,0 +1,87 @@
+*{
+    /* background-color: rgb(34, 32, 32); */
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Poppins','sans-serif';
+}
+body{
+    background: #222;
+}
+.top{
+    text-align: center;
+    color: white;
+    margin: 50px;
+}
+.main_box{
+    background: linear-gradient(135deg,#00feba,#5b548a);/*aatt rangi colour dega box ko yeh*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 400px;
+    margin: 100px auto 0;
+    width: 25%;
+    border-radius: 9px;
+    gap: 25px;
+}
+.search{
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin: 5px auto 0;
+    height: 50px;
+}
+.search input{
+    border-radius: 10px;
+    border: transparent;
+    padding: 10px;
+    height: 20px;
+    width: 200px
+}
+.search button{
+    padding: 10px;
+    border: transparent;
+    border-radius: 60%;
+}
+.weather{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.lower_part{
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+.otherdetail{
+    display: flex;
+    flex-direction: column;
+}
+.humiditydetail,.winddetail{
+    font-size: 23px;
+    color: white;
+}
+.humiditydetail1,.winddetail1{
+    font-size: 19px;
+    color: white;
+}
+.windspped,.humidity{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.error{
+    text-align: left;
+    margin-left: 10px;
+    font-size:  15px;
+    margin-top: 10px;
+    display: none;
+}
+.temp{
+    color: white;
+    font-size: 50px;
+}
+.weather{
+    display: none;
+}
