@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .main{
+            background: grey;
+            padding: 20px;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            gap: 20px;
+        }
+        .heading h1{
+            color: white;
+        }
+        .box_1_date{
+            background-color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+        }  
+        .box_1_date input{
+            padding: 10px;
+        }
+        .box_1_date button{
+            padding: 10px;
+        }
+        button:hover{
+            background-color: yellow;
+        }
+        .result{
+            color: white;
+            font-size: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="heading">
+            <h1>JavaScript</h1>
+            <h1>Age Calculator</h1>
+        </div>
+        <div class="box_1_date">
+            <input type="date" id="date">
+            <button id="but" onclick="calculateage()">Calculate</button>
+        </div>
+        <div class="result"></div>
+    </div>
+</body>
+<script>
+    const date = new Date()
+    const extra = document.querySelector(".result")
+    extra.innerHTML=''
+    // console.log(date)
+    let getdate = date.getDate()
+    let getyear = date.getFullYear()
+    let getmonth = date.getMonth()+1
+
+    
+    const userdate = document.getElementById("date")
+    userdate.max = new Date().toISOString().slice(0,10)
+
+    function calculateage(){ 
+        const inputdate=new Date(userdate.value)
+        // console.log(inputdate);
+        extra.innerHTML=''
+        if (!userdate.value) {
+            extra.textContent = 'Please select a date.';
+            return;
+        }
+
+        // let haveyear = Number(inputdate.substring(0,4))
+        // let havemonth = Number(inputdate.substring(5,7))+1
+        // let havedate = Number(inputdate.substring(8,10))
+        
+        let haveyear = inputdate.getFullYear()
+        let havemonth = inputdate.getMonth()+1
+        let havedate = inputdate.getDate()
+
+        //calculate difference in dates 
+        // You are 30 years, 4 months and 17 days old
+        //newdate, newyear, newmonth 
+
+        let newyear = getyear - haveyear;
+        let newmonth = getmonth - havemonth;
+        let newdate = getdate - havedate;
+
+        if (newdate < 0) {
+            newmonth--;
+            newdate += getdaysinmonth(getyear, getmonth - 1);
+        }
+
+        if (newmonth < 0) {
+            newyear--;
+            newmonth += 12;
+        }
+
+        console.log(`You are ${newyear} years, ${newmonth} months and ${newdate} days old.`);
+
+
+        let newspan = document.createElement("p")
+        newspan.textContent = `You are ${newyear} years, ${newmonth} months and ${newdate} days old.`
+        extra.appendChild(newspan)
+    }
+    function getdaysinmonth(year, month) {
+        return new Date(year, month + 1, 0).getDate();
+    }
+</script>
+</html>

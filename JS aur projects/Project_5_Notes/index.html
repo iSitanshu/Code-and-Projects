@@ -5,104 +5,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keep Notes</title>
     <style>
-        *{
+        * {
             padding: 0;
             margin: 0;
-            background-color: rgb(248, 103, 248);
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
-        .main{
-            padding: 100px;
+        body {
+            background-color: #f5f5f5;
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .box_1_head{
-            display: flex;
-            flex-direction: row;
+            justify-content: center;
             align-items: center;
-            gap: 10px;
+            height: 100vh;
+            color: #333;
         }
-        #but{
-            padding: 10px;
+        .main {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .box_1_head {
             display: flex;
-            flex-direction: row;
-            border-radius: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .box_1_head img {
+            height: 50px;
+        }
+        .box_1_head h1 {
+            color: #333;
+            margin-left: 10px;
+            font-size: 24px;
+        }
+        #but {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #6a1b9a;
+            color: #fff;
             border: none;
-            background-color: purple;
-            min-width: 20%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-        #but h1{
-            background-color: purple;
+        #but:hover {
+            background-color: #4a148c;
         }
-        .input-box{
-            background: white;
-            height: 100px;
+        #but img {
+            height: 24px;
+            margin-right: 10px;
+        }
+        #but h1 {
+            font-size: 18px;
+        }
+        .input-box {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            padding: 10px;
             margin-top: 10px;
+            border-radius: 5px;
+            min-height: 100px;
+            position: relative;
         }
-        .input-box img{
-            align-items: right;
-            margin: 0 0 0 95%;
+        .input-box img {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="main">
         <div class="box_1_head">
-            <img src="images/Notes_icon.png" alt="" height="50vh">
-            <h1 style="color: white;">Notes</h1>
+            <img src="images/Notes_icon.png" alt="Notes Icon">
+            <h1>Notes</h1>
         </div>
         <button id="but" onclick="createNote()">
-            <img src="images/pen.jpeg" alt="" height="30px">
-            <h1>Create Notes</h1>
+            <img src="images/pen.jpeg" alt="Create Notes">
+            <h1>Create Note</h1>
         </button>
-        <div id="extra">
-            <!-- <p contenteditable="true" class="input-box">
-                <img src="/Project_5_Notes/images/delete.png" alt="" height="40vh">
-            </p> -->
-        </div>
+        <div id="extra"></div>
     </div>
-</body>
-<script>
-    const button = document.getElementById("but")
-    const extra = document.getElementById("extra")
+    <script>
+        const extra = document.getElementById("extra");
 
-    function showNotes(){
-        extra.innerHTML = localStorage.getItem("notes")
-    }
-    showNotes()
-    function updateStorage(){
-        localStorage.setItem("notes",extra.innerHTML)
-    }
+        function showNotes() {
+            extra.innerHTML = localStorage.getItem("notes");
+        }
 
-    function createNote(){
-        let inputbox = document.createElement("div")
-        let img = document.createElement("img")
-        inputbox.className="input-box"
-        inputbox.setAttribute("contenteditable","true")
-        img.src = "/Project_5_Notes/images/delete.png"
-        img.height=30;
-        extra.appendChild(inputbox).appendChild(img)
-        updateStorage()
-    }
-    extra.addEventListener("click",function(e){
-        if(e.target.tagName === "IMG"){
-            e.target.parentElement.remove()
-            updateStorage()
+        function updateStorage() {
+            localStorage.setItem("notes", extra.innerHTML);
         }
-        else if(e.target.tagName === "P"){
-            notes = document.querySelectorAll("input-box")
-            notes.forEach(nt => {
-                nt.onkeyup =function(){
-                    updateStorage()
-                }
-            });
-        }
-    })
-    extra.addEventListener("keyup", function(e) {
-        if (e.target.classList.contains("input-box")) {
+
+        function createNote() {
+            let inputbox = document.createElement("div");
+            let img = document.createElement("img");
+            inputbox.className = "input-box";
+            inputbox.setAttribute("contenteditable", "true");
+            img.src = "images/delete.png";
+            img.height = 30;
+            img.onclick = function() {
+                inputbox.remove();
+                updateStorage();
+            };
+            inputbox.appendChild(img);
+            extra.appendChild(inputbox);
             updateStorage();
         }
-    });
 
-</script>
+        extra.addEventListener("keyup", function() {
+            updateStorage();
+        });
+
+        showNotes();
+    </script>
+</body>
 </html>

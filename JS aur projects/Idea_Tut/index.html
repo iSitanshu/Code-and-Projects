@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change the Resume Side by Side</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .heading{
+            text-align: center;
+        }
+        .middle{
+            display: flex;
+            flex-direction: row;
+            height: 50vh;
+
+        }
+        .leftside{
+            width: 50%;
+            border: 1px solid black;
+        }
+        .rightside{
+            width: 50%;
+            border: 1px solid black;
+        }
+        .rightside h1{
+            text-align: center;
+        }
+        .rightside span{
+            color: red;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="heading">
+            <h1>kr dunga change Resume</h1>
+            <p>Fill the required blanks - (Fill the required information correctly)</p>
+        </div>
+        <div class="middle">
+            <div class="leftside">
+                First Name:<input type="text" id="name"><br>
+                Last Name:<input type="text" id="name2"><br>
+                College Name: <input type="text" id="College"><br>
+                CGPA(in percentage): <input type="text" id="cgpa"> <br>
+                Internship: <input type="text" id="internship"><br>
+                Project: <input type="text" id="project"> <br>
+                <button id="but" onclick="collectnprint()">Create my resume</button>
+            </div>
+            <div class="rightside">
+                <!-- <h1>Sitanshu Mishra</h1>
+                <span>Education: </span>7.6 <br>
+                <span>College: </span>KIET Group of Institution <br>
+                <span>Internship: </span>2 <br>
+                <span>Project: </span>2  -->
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const button = document.getElementById("but")
+    function collectnprint(){
+        const firstname = document.getElementById("name").value
+        const lastname = document.getElementById("name2").value
+        const college = document.getElementById("College").value
+        const cgpa = document.getElementById("cgpa").value
+        const internship = document.getElementById("internship").value
+        const project = document.getElementById("project").value
+
+        const rightside = document.querySelector(".rightside")
+        rightside.innerHTML = ''
+
+        let nameside = document.createElement("h1")
+        nameside.textContent=firstname+" "+lastname
+        let collegeside = document.createElement("span")
+        collegeside.textContent="College: "+college
+        let cgpaside = document.createElement("span")
+        cgpaside.textContent="CGPA: "+cgpa
+        let internshipside = document.createElement("span")
+        internshipside.textContent="Internship: "+internship
+        let projectside = document.createElement("span")
+        projectside.textContent="Project: "+project
+
+        rightside.appendChild(nameside)
+        rightside.appendChild(document.createElement("br"))
+        rightside.appendChild(collegeside)
+        rightside.appendChild(document.createElement("br"))
+        rightside.appendChild(cgpaside);
+        rightside.appendChild(document.createElement("br"));  // Line break for better formatting
+        rightside.appendChild(internshipside);
+        rightside.appendChild(document.createElement("br"));  // Line break for better formatting
+        rightside.appendChild(projectside);
+    }
+
+</script>
+</html>
