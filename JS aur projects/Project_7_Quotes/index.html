@@ -4,15 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quotes of the day</title>
+    <style>
+        *{
+            padding: 0;margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            box-sizing: border-box;
+            background-color: rgb(40, 172, 182);
+        }
+        .main{
+            text-align: center;
+            margin: 30px auto 0;
+            gap: 10px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 70vh;
+            width: 80vh;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid black;
+        }
+        .main h1{
+            text-decoration: underline;
+            background-color: white;
+        }
+        .last{
+            background-color: white;
+        }
+        .extra{
+            padding: 30px;
+            background-color: white;
+        }
+        #first{
+            padding: 10px;
+            background-color: rgb(40, 172, 182);
+            color: white;
+            border-radius: 10px;
+        }
+        #second{
+            background-color: white;
+            padding: 6px;
+            border-radius: 10px;
+        }
+        .extra{
+            padding: 20px;
+            border: 1px solid black;
+            height: 30vh;
+            width: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+        .extra blockquote{
+            content: '"';
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .extra span{
+            display: block;
+            /* margin-top: 10px; */
+            float: right;
+            font-style: italic;
+            right: 10px;
+            bottom: 10px;
+            position: absolute;
+        }
+    </style>
 </head>
 <body>
     <div class="main">
         <h1>Quote of the day</h1>
-        <div class="extra">Display the quotes</div>
+        <div class="extra">
+            <blockquote id="quote"></blockquote>
+            <span id="writter">by someone</span>
+        </div>
         <div class="last">
-            <button id="first">New Quote</button>
-            <button id="second"><img src="" alt=""> Tweet</button>
+            <button id="first" onclick="getquote(api_url)">New Quote</button>
+            <button id="second" onclick="Tweet()"><img src="/JS aur projects/Project_7_Quotes/images/image.png" alt="" height="20px"> Tweet</button>
         </div>
     </div>
 </body>
+<script>
+    const api_url="https://api.quotable.io/random"
+    const extra = document.querySelector(".extra")
+    const quoter = document.getElementById("quote")
+    const writter = document.getElementById("writter")
+    async function getquote(url){
+        const response = await fetch(url)
+        var data = await response.json()
+        console.log(data);
+        quote = data.content
+        console.log(quote);
+        var author = data.author
+        console.log(author);
+        quoter.innerHTML=`${quote}`
+        writter.innerHTML=`by ${author}`
+    }
+    getquote(api_url)
+
+    function Tweet(){
+        window.open("https://twitter.com/intent/tweet?text="+quoter.innerHTML+
+        "--- by "+writter.innerHTML,"Tweet Window","width=600, height=300")
+    }
+</script>
 </html>
