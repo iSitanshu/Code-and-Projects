@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast Notification</title>
+    <style>
+        button {
+            margin-top: 10px;
+            font-size: 13px;
+            padding: 10px;
+            height: 35px;
+            width: 70px;
+            background: grey;
+            color: white;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        #toastholder {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            overflow: hidden;
+            padding: 20px;
+        }
+        .toast {
+            width: 400px;
+            height: 80px;
+            background: white;
+            font-weight: 500;
+            margin: 15px 0;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            transform: translateX(100%);
+            animation: moveleft 0.5s linear forwards, slideout 0.5s 5.5s linear forwards;
+            position: relative;
+        }
+        .toast i {
+            margin: 0 20px;
+            font-size: 35px;
+            color: green;
+        }
+        .toast.error i {
+            color: red;
+        }
+        .toast.invalid i {
+            color: orange;
+        }
+        .toast::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 5px;
+            background: green;
+            animation: anim 5s linear forwards;
+        }
+        @keyframes anim {
+            100% {
+                width: 0;
+            }
+        }
+        .toast.error::after {
+            background: red;
+        }
+        .toast.invalid::after {
+            background: orange;
+        }
+        @keyframes moveleft {
+            100% {
+                transform: translateX(0);
+            }
+        }
+        @keyframes slideout {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="buttons">
+        <button id="success" onclick="showToast(successmsg)">Success</button>
+        <button id="Error" onclick="showToast(errormsg)">Error</button>
+        <button id="Invalid" onclick="showToast(invalidmsg)">Invalid</button>
+    </div>
+    <div id="toastholder"></div>
+
+    <script>
+        let successmsg = 'Successfully submitted';
+        let errormsg = 'Please fix the error!';
+        let invalidmsg = 'Invalid input, check again';
+
+        let toastbox = document.getElementById("toastholder");
+
+        function showToast(mess) {
+            let toast = document.createElement("div");
+            toast.classList.add('toast');
+
+            // Adding icons to the toast based on the message type
+            let icon = document.createElement("i");
+            if (mess.toLowerCase().includes('error')) {
+                toast.classList.add('error');
+                icon.classList.add('fa', 'fa-exclamation-circle');
+            } else if (mess.toLowerCase().includes('invalid')) {
+                toast.classList.add('invalid');
+                icon.classList.add('fa', 'fa-exclamation-triangle');
+            } else {
+                icon.classList.add('fa', 'fa-check-circle');
+            }
+
+            toast.innerHTML = `<i class="${icon.classList}"></i> ${mess}`;
+            toastbox.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 6000);
+        }
+    </script>
+    <!-- Font Awesome for icons (optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</body>
+</html>
