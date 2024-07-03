@@ -4,10 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotify Premium</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/ba84deddbf.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="main">
-        
+        <div class="top_icon">
+            <i class="fa-solid fa-angle-left"></i>  
+            <i class="fa-solid fa-bars"></i>    
+        </div>
+        <div class="images">
+            <img src="/JS aur projects/Project_10_Spotify/4AMinkarachi.webp" alt="">
+        </div>
+        <div class="singer">
+            <p id="d1">4 AM in Karachi</p>
+            <p id="d2">Talha Anjum</p>
+        </div>
+        <audio id="song">
+            <source src="/JS aur projects/Project_10_Spotify/umair-talha-anjum-4am-in-karachi (online-audio-converter.com).mp3" type="audio/mpeg">
+        </audio>
+        <input type="range" value="0" id="progress">
+        <div class="controls">
+            <div><i class="fa-solid fa-backward"></i></div>
+            <div onclick="playpause()"><i class="fa-solid fa-play" id="controls"></i></div>
+            <div><i class="fa-solid fa-forward"></i></div>
+        </div>
     </div>
 </body>
+<script>
+    let progress = document.getElementById("progress")
+    let song = document.getElementById("song")
+    let controls = document.getElementById("controls")
+
+    song.onloadedmetadata = function(){
+        progress.max = song.duration;
+        progress.value = song.currentTime;
+    }
+
+    // function playpause(){
+    //     if(song.play){
+    //         song.pause();
+    //         controls.classList.remove("fa-pause") //remove the class name pause
+    //         controls.classList.add("fa-play") //add the class name play
+    //     }else{
+    //         song.play()
+    //         controls.classList.add("fa-pause") //add the class name play
+    //         controls.classList.remove("fa-play") //remove the class name pause
+    //     }
+    // }
+
+    function playpause() {
+        if (song.paused) {
+            // If the song is paused, play it and change the button to a pause icon
+            song.play();
+            controls.classList.remove("fa-play");
+            controls.classList.add("fa-pause");
+        } else {
+            // If the song is playing, pause it and change the button to a play icon
+            song.pause();
+            controls.classList.remove("fa-pause");
+            controls.classList.add("fa-play");
+        }
+    }
+
+    if(song.play()){
+        setInterval(() => {
+            progress.value = song.currentTime
+        }, 500);
+    }
+
+    progress.onchange = function(){
+        song.play()
+        song.currentTime=progress.value
+        controls.classList.add("fa-pause") //remove the class name pause
+        controls.classList.remove("fa-play") //add the class name play
+    }
+
+
+</script>
 </html>
