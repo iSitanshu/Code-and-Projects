@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Password</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        body{
+            background: #000;
+        }
+        .main{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin: 20%;
+        }
+        input{
+            font-size: 20px;
+            height: 5vh;
+            width: 90%;
+            max-width: 400px;
+            padding: 15px;
+            /* display: none !important; */
+        }
+        .show, .hide{
+            height: 27px;
+            text-align: center;
+            align-items: center;
+            margin-left: -40px;
+            visibility: visible;
+        }
+        .show_class{
+            visibility: hidden;
+        }
+        .hide_class{
+            visibility: hidden;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <input type="password" id="Password" placeholder="Password">
+        <img src="/JS aur projects/Project_13_Hide_Password/eye-close.png" id="show" class="show" onclick="Showpassword()">
+        <img src="/JS aur projects/Project_13_Hide_Password/eye-open.png" id="hide" class="hide" onclick="Hidepassword()">
+    </div>
+</body>
+<script>
+    const input_text = document.getElementById("Password")
+    const imgshowb = document.getElementById("show")
+    const imghider = document.getElementById("hide")
+
+    //initial stage mein hide krdo red image ko
+    imghider.classList.add("hide_class")
+
+    function Showpassword(){
+        imgshowb.classList.add("show_class")
+        imghider.classList.remove("hide_class")
+        input_text.type="text" // Change input type to text to show the password
+    }
+    function Hidepassword(){
+        imgshowb.classList.remove("show_class")
+        imghider.classList.add("hide_class")
+        input_text.type="password" // Change input type to password to hide the password
+    }
+</script>
+</html>
