@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop-Watch</title>
+    <script src="https://kit.fontawesome.com/ba84deddbf.js" crossorigin="anonymous"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
+            box-sizing: border-box;
+            background-color: rgb(178, 178, 245);
+        }
+        .main{
+            background: blue;
+            border: 1px solid black;
+            height: 37vh;
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 10% auto;
+        }
+        .time{
+            padding: 10px;
+            font-size: 40px;
+            font-weight: 400;
+        }
+        .buttons{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            gap: 30px;
+            background: blue;
+        }
+        .buttons #pause, #play, #return{
+            border: white;
+            border-radius: 50%;
+            background-color: white;
+            padding: 10px;
+            width: 60px;
+            height: 60px;
+            margin: 20px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="time" id="time"><P>00 : 00 : 00</P></div>
+        <div class="buttons">
+            <i class="fa-solid fa-square" id="pause"></i>
+            <i class="fa-solid fa-play" id="play"></i>
+            <i class="fa-solid fa-rotate-left" id="return" onclick="reset()"></i>
+        </div>
+    </div>
+</body>
+<script>
+    const pause = document.getElementById("pause")
+    const play = document.getElementById("play")
+    const returnbut = document.getElementById("return")
+    
+    const time = document.getElementById("time")
+
+    let seconds = 0
+    let minutes = 0
+    let hours = 0
+    let timer
+    // console.log(time);
+
+    function updateTime(){
+        seconds++;
+            // If seconds reach 60, reset to 0 and increment minutes
+            if (seconds >= 60) {
+                seconds = 0;
+                minutes++;
+                // If minutes reach 60, reset to 0 and increment hours
+                if (minutes >= 60) {
+                    minutes = 0;
+                    hours++;
+                }
+            }
+            // Format the time to always have two digits
+            let sec = seconds < 10 ? "0" + seconds : seconds;
+            let min = minutes < 10 ? "0" + minutes : minutes;
+            let hr = hours < 10 ? "0" + hours : hours;
+            // Update the time display
+            time.textContent = `${hr} : ${min} : ${sec}`;
+    }
+
+    function reset(){
+        clearInterval(timer)
+        seconds=0
+        minutes=0
+        hours=0
+        time.textContent="00 : 00 : 00"
+    }
+
+    play.addEventListener("click",()=>{
+        // Clear any existing timer to avoid multiple timers running
+        clearInterval(timer)
+        // Start a new timer that calls updateTime every second
+        timer = setInterval(updateTime,1000)
+    })
+    pause.addEventListener("click",()=>{
+        // Clear the timer to stop it
+        clearInterval(timer)
+    })
+
+</script>
+</html>

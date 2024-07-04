@@ -4,36 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pop-Up Notification</title>
+    <script src="https://kit.fontawesome.com/ba84deddbf.js" crossorigin="anonymous"></script>
     <style>
         *{
             padding: 0;
             margin: 0;
             box-sizing: border-box;
-            background-color: aqua;
             font-family: 'Times New Roman', Times, serif;
+        }
+        body{
+            background-color: aqua;
         }
         .main{
             align-items: center;
             text-align: center;
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            margin: 30%;
+            margin: 20%;
         }
         #button{
-            height: 5vh;
-            width: 15vh;
+            height: 10vh;
+            width: 20vh;
             font-size: 20px;
+            border-radius: 15px;
             background: rgb(118, 171, 233);
         }
-        
+        .box{
+            border: 1px solid black;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            gap: 10px;
+            position: absolute;
+            top: -100px;
+            transform: scale(0.1);
+            visibility: hidden;
+            transition: tranform 0.4s, top 0.4s;
+        }
+        .open_popup{
+            visibility: visible;
+            transform: scale(1);
+            top: 200px;
+        }
+        .box #OK_button{
+            background: aqua;
+            padding: 10px;
+        }
+        .box .fa-solid{
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            /* width: 30px; */
+            padding: 20px;
+            background: aqua;
+            margin: -70px auto 30px;
+        }
     </style>
 </head>
 <body>
     <div class="main">
-        <button id="button">Submit</button>
+        <button id="button" onclick="onclicking()">Submit</button>
+        <div class="box" id="boxer">
+            <i class="fa-solid fa-check"></i>
+            <h1>Thank You!</h1>
+            <p>Your details has been successfully <br> submitted. Thanks!</p>
+            <button id="OK_button" onclick="closeclicking()">OK</button>
+        </div>
     </div>
 </body>
 <script>
+    const submit_btn = document.getElementById("button")
+    const box = document.getElementById("boxer")
 
+    function onclicking(){
+        box.classList.add("open_popup")
+    }
+
+    function closeclicking(){
+        box.classList.remove("open_popup")
+    }
 </script>
 </html>
