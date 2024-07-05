@@ -12,7 +12,7 @@
         <div class="website_header">
             <div class="website_icon">
                 <img src="/JS aur projects/Project_15_Dark_Mode/logo2.png" height="40vh">
-                <p>Portpolio</p>
+                <p id="portfolio">Portfolio</p>
             </div>
             <div class="right_header">
                 <p>Home</p>
@@ -20,21 +20,21 @@
                 <p>Services</p>
                 <p>Contact</p>
                 <p>Hire Me</p>
-                <p><i class="fa-solid fa-moon"></i></p>
-                <p><i class="fa-solid fa-sun"></i></p>
+                <img src="moon.png" id="icon">
             </div>
         </div>
         <div class="center_website">
             <div class="left_center">
                 <div class="upward">        
                     <p id="one">I am Brat Simpson</p>
-                    <p id="two">This is my official portfolio website to showcase my all my related to web development and UI design.</p>
+                    <p id="two">This is my official portfolio website to showcase my all my related to web development and UI design. Bart Simpson is a mischievous 10-year-old boy living in the town of Springfield. Known for his rebellious behavior, quick wit, and love of skateboarding, Bart is the eldest child of Homer and Marge Simpson. Despite his troublemaking tendencies, Bart has a good heart and cares deeply for his family and friends</p>
                     <button id="three">Download his CV</button>
                 </div>
                 <div class="downward">
-                    <p>Li</p>
-                    <p>Be</p>
-                    <p>Globe</p>
+                    <p>Troublemaking Antics</p>
+                    <p>Graffiti Art</p>
+                    <p>Skateboarding Stunts</p>
+                    <p>Prank Calling</p>
                 </div>
             </div>
             <div class="right_center">
@@ -43,4 +43,13 @@
         </div>
     </div>
 </body>
+<script>
+    var icon = document.getElementById("icon")
+
+    icon.onclick = function(){
+        document.body.classList.toggle("dark_theme")
+        if(document.body.classList.contains("dark_theme")) icon.src = "sun.png"
+        else icon.src = "moon.png"
+    }
+</script>
 </html>

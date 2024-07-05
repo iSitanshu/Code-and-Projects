@@ -3,8 +3,19 @@
     font-family: 'Times New Roman', Times, serif;
     box-sizing: border-box;
 }
+:root {
+    --primary-color: #edf2fc;
+    --secondary-color: #212121;
+}
+
+.dark_theme {
+    --primary-color: #0c0c0c;
+    --secondary-color: #ffffff;
+}
+
 body{
-    background: white;
+    background: var(--primary-color);
+    color: var(--secondary-color);
 }
 .website_header{
     display: flex;
@@ -16,6 +27,7 @@ body{
     display: flex;
     flex-direction: row;
     gap: 20px;
+    color: var(--secondary-color);
     justify-content: center;
     align-items: center;
 }
@@ -23,11 +35,12 @@ body{
     display: flex;
     flex-direction: row;
     gap: 10px;
+    color: var(--secondary-color);
     justify-content: center;
     align-items: center;
 }
 .center_website{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
     flex-direction: row;
     padding: 30px;
@@ -41,6 +54,7 @@ body{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    color: var(--secondary-color);
 }
 .upward #one{
     font-size: 30px;
@@ -51,9 +65,16 @@ body{
 .upward #three{
     font-size: 16px;
     width: 30%;
+    background: white;
 }
 .downward{
     display: flex;
     flex-direction: row;
     gap: 10px;
+    color: var(--secondary-color);
+    justify-content: space-around;
+}
+#icon{
+    width: 25px;
+    cursor: pointer;
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picture SlideShow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="gallery-wrap">
+        <img src="/JS aur projects/Project_17_Picture_Slide/h-scroll-img/images/back.png" id="backbtn">
+        <div class="gallery">
+            <div>
+                <span><img src="h-scroll-img/images/image-1.png" alt=""></span>
+                <span><img src="h-scroll-img/images/image-2.png" alt=""></span>
+                <span><img src="h-scroll-img/images/image-3.png" alt=""></span>
+            </div>
+            <div>
+                <span><img src="h-scroll-img/images/image-4.png" alt=""></span>
+                <span><img src="h-scroll-img/images/image-5.png" alt=""></span>
+                <span><img src="h-scroll-img/images/image-6.png" alt=""></span>
+            </div>
+        </div>
+        <img src="/JS aur projects/Project_17_Picture_Slide/h-scroll-img/images/next.png" id="nextbtn">
+    </div>
+
+</body>
+<script>
+    let scrollcontainer = document.querySelector(".gallery")
+    let backbtn = document.getElementById("backbtn")
+    let nextbtn = document.getElementById("nextbtn")
+
+    scrollcontainer.addEventListener("wheel",(evt)=>{
+        evt.preventDefault(); //Prevents the default scrolling behavior.
+        scrollcontainer.scrollLeft +=evt.deltaY; //Scrolls the gallery horizontally based on the vertical scroll input.
+        scrollcontainer.style.scrollBehavior = "auto" 
+    })
+    nextbtn.addEventListener("click",()=>{
+        scrollcontainer.style.scrollBehavior = "smooth"
+        scrollcontainer.scrollLeft+=900;
+    })
+    backbtn.addEventListener("click",()=>{
+        scrollcontainer.style.scrollBehavior = "smooth"
+        scrollcontainer.scrollLeft-=900;
+    })
+
+</script>
+</html>
